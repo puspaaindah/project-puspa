@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Class Binding</title>
+    <script src="https://unpkg.com/vue@3"></script>
+    <style>
+        .text-red {
+            color: red;
+        }
+        .text-green {
+            color: green;
+        }
+        .text-yellow {
+            color: yellow;
+        }
+        .text-blue {
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <p v-if="siang">🌞</p>
+        <p v-else>🌙</p>
+        <p v-show="siang">🌞</p>
+        <p v-show="siang == false">🌙</p>
+
+        <h2>Detail Biodata John Doe : </h2>
+        <p v-for="(value, key, index) in character">{{ index + 1 }}) {{ key }}: {{ value }}</p>
+
+        <p :class="textDanger">halo, ini website aplikasi vue sederhana puspa indah</p>
+
+        <h2>Ini adalah penerapan Class pada VueJS:</h2>
+        <p :class="textDanger">Aku akan berwarna merah</p>
+        <p :class="textPrimary">Aku akan berwarna hijau</p>
+        <p :class="textSecondary">Aku akan berwarna kuning</p>
+        <p :class="textBlue">Aku akan berwarna biru</p>
+
+        <h2>Ini adalah penerapan Method pada VueJS :</h2>
+       <input type="text" v-model="user_input">
+       <button @click="reverseString()">Klik aku!</button>
+       <p>Maka akan menjadi: {{ reversed_name }}</p>
+
+       <button @click="show = !show">Klik Aku</button>
+        <Transition>
+            <p v-if="show">Selamat Datang di Gamelab Indonesia</p>
+            <p v-else>Raih Masa Depan Brilian dengan Optimis Skill Digital</p>
+        </Transition>
+    </div>
+        
+    <template v-if="siang">
+        <h4>Kegiatanku di siang hari</h4>
+        <ol>
+            <li>Mandi</li>
+            <li>Makan</li>
+            <li>Belajar Ngoding</li>
+        </ol>
+    </template>
+
+    <style>
+        .v-enter-active,
+        .v-leave-active {
+            transition: opacity 0.5s ease;
+         }
+
+        .v-enter-from,
+        .v-leave-to {
+            opacity: 0;
+         }
+    </style>
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    siang: true,
+    
+                    nama: 'John Doe',
+                    usia: '32',
+                    alamat: 'USA',
+
+                    textDanger: 'text-danger',
+
+                    textDanger: 'text-red',
+                    textPrimary: 'text-green',
+                    textSecondary: 'text-yellow',
+                    textBlue: 'text-blue',
+
+                    user_input: '',
+                    reversed_name: '',
+
+                    show: false,
+
+                       }
+                    },
+                    methods: {
+                reverseString() {
+                    if(this.isInputEmpty()) {
+                        alert('Masukan string yang akan diproses terlebih dahulu')
+                    } else {
+                        this.reversed_name = this.user_input.split('').reverse().join('')
+                    }
+                },
+                isInputEmpty() {
+                    return this.user_input.length == 0;
+                    }
+                }
+                
+            
+        }).mount('#app')
+    </script>
+</body>
+</html>
+
